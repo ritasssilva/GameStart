@@ -148,14 +148,14 @@ public class Metodos {
      * @param vendas Matriz de vendas
      * @return Matriz com o ID do cliente, total gasto e jogos comprados
      */
-
     public static String[][] calcularComprasClientes(String[][] vendas) {
         // Array temporário para armazenar as informações dos clientes
         String[][] infoClientes = new String[vendas.length][3];
         int count = 0;
 
-        // Itera sobre todas as vendas
-        for (String[] venda : vendas) {
+        // Itera sobre todas as vendas usando um loop for tradicional
+        for (int i = 0; i < vendas.length; i++) {
+            String[] venda = vendas[i];
             int idCliente = Integer.parseInt(venda[1]);
             double valorVenda = Double.parseDouble(venda[5]);
             String nomeJogo = venda[4];
@@ -163,14 +163,14 @@ public class Metodos {
             boolean clienteExiste = false;
 
             // Verifica se o cliente já existe no array infoClientes
-            for (int i = 0; i < count; i++) {
-                if (Integer.parseInt(infoClientes[i][0]) == idCliente) {
+            for (int j = 0; j < count; j++) {
+                if (Integer.parseInt(infoClientes[j][0]) == idCliente) {
                     clienteExiste = true;
                     // Atualiza o total gasto pelo cliente
-                    double totalGasto = Double.parseDouble(infoClientes[i][1]) + valorVenda;
-                    infoClientes[i][1] = Double.toString(totalGasto);
+                    double totalGasto = Double.parseDouble(infoClientes[j][1]) + valorVenda;
+                    infoClientes[j][1] = Double.toString(totalGasto);
                     // Adiciona o novo jogo comprado à lista de jogos do cliente
-                    infoClientes[i][2] += ", " + nomeJogo;
+                    infoClientes[j][2] += ", " + nomeJogo;
                     break;
                 }
             }
@@ -194,6 +194,7 @@ public class Metodos {
 
         return resultado;
     }
+
 
     /**
      * Método para remover duplicados numa matriz baseado numa coluna específica
